@@ -1,0 +1,313 @@
+/*
+ * Fjord & Aurora — Design System Tokens
+ * tekavogtil visual identity
+ *
+ * Standalone CSS custom-property version of the Tailwind config tokens
+ * used in the tekavogtil platform. Drop this into any project to apply
+ * the Fjord & Aurora colour system.
+ *
+ * The Tailwind extension config lives inline in layouts/app.blade.php:
+ *
+ *   tailwind.config = {
+ *     darkMode: 'class',
+ *     theme: { extend: { colors: { ... }, borderRadius: { ... }, fontFamily: { ... } } }
+ *   }
+ *
+ * See design-system.md for the full component class reference.
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COLOUR TOKENS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Backgrounds ── */
+  --color-background:   #020d14;  /* Main page background — deep fjord */
+  --color-surface-low:  #0b0f10;  /* Alternate section background */
+  --color-surface-mid:  #1d2022;  /* Card / panel backgrounds */
+
+  /* ── Accent ── */
+  --color-teal:         #00f1fe;  /* Electric teal — CTAs, icons, active states, glow */
+
+  /* ── Text ── */
+  --color-on-surface:   #e0e3e5;  /* Primary text */
+  --color-on-muted:     #c3c7cb;  /* Secondary text, descriptions */
+  --color-outline:      #8d9195;  /* Labels, captions, footer */
+
+  /* ── Borders ── */
+  --border-subtle:      rgba(255, 255, 255, 0.07);  /* Card borders at rest */
+  --border-hover:       rgba(0, 241, 254, 0.45);    /* Card borders on hover */
+  --border-nav:         rgba(255, 255, 255, 0.06);  /* Nav bottom border */
+
+  /* ── Glows ── */
+  --glow-teal-soft:     rgba(0, 241, 254, 0.08);    /* Card hover shadow */
+  --glow-teal-btn:      rgba(0, 241, 254, 0.35);    /* Button hover shadow */
+
+  /* ── Typography ── */
+  --font-sans:          'Inter', sans-serif;
+  --font-display:       'Space Grotesk', sans-serif;
+
+  /* ── Border Radius ── */
+  --radius-sm:          4px;    /* chips, lang-btn */
+  --radius-md:          6px;    /* buttons (default) */
+  --radius-card:        8px;    /* glass-card */
+  --radius-panel:       10px;   /* glass-panel */
+  --radius-lg:          12px;
+  --radius-xl:          16px;
+  --radius-full:        9999px; /* circles, dots */
+}
+
+/* ── Light mode overrides (uncomment when toggle is implemented) ────────── */
+/*
+html.light {
+  --color-background:   #f5f7fa;
+  --color-surface-low:  #eef0f3;
+  --color-surface-mid:  #ffffff;
+  --color-on-surface:   #1a1f24;
+  --color-on-muted:     #4a5568;
+  --color-outline:      #718096;
+  --border-subtle:      rgba(0, 0, 0, 0.08);
+  --border-hover:       rgba(0, 200, 220, 0.5);
+}
+*/
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLASS COMPONENTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Fixed navigation bar */
+.glass-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(2, 13, 20, 0.82);
+  border-bottom: 1px solid var(--border-nav);
+  z-index: 50;
+}
+
+/* Content card — hover reveals teal border + glow */
+.glass-card {
+  background: var(--color-surface-mid);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 24px var(--glow-teal-soft);
+}
+
+/* Floating panel — heavier blur, darker background */
+.glass-panel {
+  background: rgba(13, 20, 28, 0.90);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-panel);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-teal);
+  color: var(--color-background);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px var(--glow-teal-btn);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--color-teal);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid var(--color-teal);
+  border-radius: var(--radius-md);
+  padding: 11px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--color-teal);
+  color: var(--color-background);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY HELPERS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Small uppercase label above headings */
+.label-caps {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-outline);
+}
+
+/* Large stat number — hero / trust section */
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--color-on-surface);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   AURORA EFFECTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Hero background — two-point radial aurora overlay */
+.aurora-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 40%, rgba(0, 241, 254, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 60%, rgba(0, 100, 200, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Blurred glow blob — place behind section content */
+.aurora-glow {
+  position: absolute;
+  border-radius: var(--radius-full);
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+/* Animated horizontal shimmer line */
+.aurora-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 241, 254, 0.4),
+    transparent
+  );
+  animation: aurora-slide 4s ease-in-out infinite;
+}
+
+/*
+ * NOTE: In Blade templates, write @@keyframes (not @keyframes).
+ * Blade's preprocessor interprets bare @word as a directive.
+ * This file is plain CSS — @keyframes is correct here.
+ */
+@keyframes aurora-slide {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50%       { transform: translateX(100%);  opacity: 1; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLL REVEAL ANIMATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Initial hidden state — add .reveal class to any section */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Active state — added by IntersectionObserver in JavaScript */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+ * JavaScript observer (add to bottom of every page, inside <script>):
+ *
+ * const observer = new IntersectionObserver((entries) => {
+ *   entries.forEach(entry => {
+ *     if (entry.isIntersecting) {
+ *       entry.target.classList.add('visible');
+ *     }
+ *   });
+ * }, { threshold: 0.1 });
+ *
+ * document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAYMENT LOGOS STRIP
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Vipps, Visa, Mastercard logos — greyscale until hover */
+.payment-logos img {
+  filter: grayscale(100%) opacity(0.5);
+  transition: filter 0.25s ease;
+}
+
+.payment-logos img:hover {
+  filter: grayscale(0%) opacity(1);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LANGUAGE TOGGLE BUTTON
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.lang-toggle-btn {
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color 0.2s ease;
+}
+
+.lang-toggle-btn:hover {
+  border-color: rgba(0, 241, 254, 0.4);
+}
+
+/* Active locale label */
+.lang-active  { color: var(--color-teal); }
+
+/* Inactive locale label */
+.lang-other   { color: var(--color-outline); }
