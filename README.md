@@ -114,6 +114,7 @@ See [claude-code-workflow.md](claude-code-workflow.md) for the full workflow wri
 - **Founder:** Ayyad Anwar
 - **LinkedIn:** [linkedin.com/in/ayyad-anwar](https://www.linkedin.com/in/ayyad-anwar)
 - **GitHub:** [github.com/adyelmoro](https://github.com/adyelmoro)
+- **This repo:** [github.com/adyelmoro/TekavogtilProject-public](https://github.com/adyelmoro/TekavogtilProject-public)
 
 ---
 
